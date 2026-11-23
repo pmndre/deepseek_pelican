@@ -229,6 +229,11 @@ const PERSON_MESH = {
   ]),
   // hair: see HAIR_STYLES (head space, one mesh per style)
   arm: ellipsoid(0.052, 0.27, 0.052, 8, 6),
+  // Hand: a slightly flattened mitten at the end of each arm, thumb forward.
+  hand: merge([
+    ellipsoid(0.045, 0.062, 0.035, 8, 6),
+    at(ellipsoid(0.018, 0.03, 0.017, 6, 4), -0.035, 0.012, 0),
+  ]),
   // Pelvis in trouser colour: closes the gap between the waist and the legs,
   // whose tops sink into it.
   hips: ellipsoid(0.125, 0.12, 0.175, 10, 8),
@@ -366,6 +371,8 @@ export function buildActors() {
       hair: add(hairMesh, hairCol, [0.10, 10, 0.02], layer),
       armL: add(PERSON_MESH.arm, shirt, [0.08, 6, 0], layer),
       armR: add(PERSON_MESH.arm, shirt, [0.08, 6, 0], layer),
+      handL: add(PERSON_MESH.hand, PAL.skin, [0.12, 10, 0], layer),
+      handR: add(PERSON_MESH.hand, PAL.skin, [0.12, 10, 0], layer),
       hips: add(PERSON_MESH.hips, PAL.trousers, [0.08, 6, 0], layer),
       legL: add(PERSON_MESH.leg, PAL.trousers, [0.08, 6, 0], layer),
       legR: add(PERSON_MESH.leg, PAL.trousers, [0.08, 6, 0], layer),
@@ -554,8 +561,13 @@ export function buildActors() {
       p.hair.model = headM;
 
       // arms swing opposite to the leg on the same side
-      p.armL.model = mul(root, T(0, 1.36, 0.225), Rz(-thL * 0.9), T(0, -0.26, 0));
-      p.armR.model = mul(root, T(0, 1.36, -0.225), Rz(-thR * 0.9), T(0, -0.26, 0));
+      const shoulderL = mul(root, T(0, 1.36, 0.225), Rz(-thL * 0.9));
+      const shoulderR = mul(root, T(0, 1.36, -0.225), Rz(-thR * 0.9));
+      p.armL.model = mul(shoulderL, T(0, -0.26, 0));
+      p.armR.model = mul(shoulderR, T(0, -0.26, 0));
+      // hands overlap the arm's tip so there is no gap at the wrist
+      p.handL.model = mul(shoulderL, T(0, -0.555, 0));
+      p.handR.model = mul(shoulderR, T(0, -0.555, 0));
 
       const hipL = mul(root, T(0, 0.84, 0.085), Rz(thL));
       const hipR = mul(root, T(0, 0.84, -0.085), Rz(thR));

@@ -1,6 +1,8 @@
 # Pelican on a Bicycle
 
-![A pixel-art pelican riding a green bicycle through a meadow, with people walking by, trees, snow-capped mountains and birds in the sky](docs/screenshot.webp)
+**[Live demo →](https://pmndre.github.io/deepseek_pelican/)** (needs a browser with WebGPU)
+
+[![A pixel-art pelican riding a green bicycle through a meadow, with people walking by, trees, snow-capped mountains and birds in the sky](docs/screenshot.webp)](https://pmndre.github.io/deepseek_pelican/)
 
 A pelican rides a bicycle through an endless low-poly countryside, rendered in real time with **WebGPU** and an optional pixel-art look.
 
