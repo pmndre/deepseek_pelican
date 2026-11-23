@@ -1,5 +1,7 @@
 # Pelican on a Bicycle
 
+![A pixel-art pelican riding a green bicycle through a meadow, with people walking by, trees, snow-capped mountains and birds in the sky](docs/screenshot.webp)
+
 A pelican rides a bicycle through an endless low-poly countryside, rendered in real time with **WebGPU** and an optional pixel-art look.
 
 Everything is procedural: no models, no textures, no libraries besides the dev server. The bike, the rider, the trees, the mountains and the people walking by are all built from code.
